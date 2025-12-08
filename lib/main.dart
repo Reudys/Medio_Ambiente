@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:carousel_slider/carousel_slider.dart';
+import 'package:medio_ambiente/services.dart';
+import 'package:medio_ambiente/team.dart';
 
 void main() {
   runApp(MyApp());
@@ -232,6 +234,34 @@ class InicioScreen extends StatelessWidget {
             ),
 
             SizedBox(height: 16),
+            // --- NUEVOS BOTONES AGREGADOS PARA ACCEDER A LOS MÓDULOS ---
+            Text(
+              'Accesos Rápidos',
+              style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold, color: Colors.green[800]),
+            ),
+            SizedBox(height: 10),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              children: [
+                ElevatedButton.icon(
+                  icon: Icon(Icons.miscellaneous_services),
+                  label: Text("Servicios"),
+                  style: ElevatedButton.styleFrom(backgroundColor: Colors.green),
+                  onPressed: () {
+                    Navigator.push(context, MaterialPageRoute(builder: (context) => ServiciosActivity()));
+                  },
+                ),
+                ElevatedButton.icon(
+                  icon: Icon(Icons.people),
+                  label: Text("Equipo"),
+                  style: ElevatedButton.styleFrom(backgroundColor: Colors.green[700]),
+                  onPressed: () {
+                    Navigator.push(context, MaterialPageRoute(builder: (context) => EquipoActivity()));
+                  },
+                ),
+              ],
+            ),
+            SizedBox(height: 30),
           ],
         ),
       ),
