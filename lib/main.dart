@@ -4,6 +4,7 @@ import 'package:medio_ambiente/services.dart';
 import 'package:medio_ambiente/team.dart';
 import 'package:medio_ambiente/Kevin.dart';
 import 'package:medio_ambiente/reportes.dart';
+import 'package:medio_ambiente/mapa_areas.dart';
 
 void main() {
   runApp(MyApp());
@@ -60,7 +61,63 @@ class InicioScreen extends StatelessWidget {
           fontSize: 25,
         ),
         elevation: 0,
-      ),
+      ),drawer: Drawer(
+    child: ListView(
+      padding: EdgeInsets.zero,
+      children: [
+        DrawerHeader(
+          decoration: BoxDecoration(color: Colors.green),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Icon(Icons.eco, size: 50, color: Colors.white),
+              SizedBox(height: 10),
+              Text(
+                "Menú Principal",
+                style: TextStyle(color: Colors.white, fontSize: 22),
+              ),
+            ],
+          ),
+        ),
+
+        ListTile(
+          leading: Icon(Icons.miscellaneous_services, color: Colors.green),
+          title: Text("Servicios"),
+          onTap: () => Navigator.push(
+            context,
+            MaterialPageRoute(builder: (_) => ServiciosActivity()),
+          ),
+        ),
+
+        ListTile(
+          leading: Icon(Icons.people, color: Colors.green),
+          title: Text("Equipo"),
+          onTap: () => Navigator.push(
+            context,
+            MaterialPageRoute(builder: (_) => EquipoActivity()),
+          ),
+        ),
+
+        ListTile(
+          leading: Icon(Icons.camera_alt, color: Colors.green),
+          title: Text("Videos"),
+          onTap: () => Navigator.push(
+            context,
+            MaterialPageRoute(builder: (_) => KevinPage()),
+          ),
+        ),
+
+        ListTile(
+          leading: Icon(Icons.map, color: Colors.green),
+          title: Text("Mapa"),
+          onTap: () => Navigator.push(
+            context,
+            MaterialPageRoute(builder: (_) => MapaAreasScreen()),
+          ),
+        ),
+      ],
+    ),
+  ),
       body: SingleChildScrollView(
         padding: EdgeInsets.all(16.0),
         child: Column(
@@ -284,6 +341,7 @@ class InicioScreen extends StatelessWidget {
                 ),
               ],
             ),
+       
             SizedBox(height: 30),
           ],
         ),
