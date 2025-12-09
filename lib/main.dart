@@ -3,6 +3,7 @@ import 'package:carousel_slider/carousel_slider.dart';
 import 'package:medio_ambiente/services.dart';
 import 'package:medio_ambiente/team.dart';
 import 'package:medio_ambiente/Kevin.dart';
+import 'package:medio_ambiente/reportes.dart';
 import 'package:medio_ambiente/mapa_areas.dart';
 
 void main() {
@@ -291,6 +292,55 @@ class InicioScreen extends StatelessWidget {
               ),
             ),
 
+            SizedBox(height: 16),
+            // --- NUEVOS BOTONES AGREGADOS PARA ACCEDER A LOS MÓDULOS ---
+            Text(
+              'Accesos Rápidos',
+              style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold, color: Colors.green[800]),
+            ),
+            SizedBox(height: 10),
+            GridView.count(
+              shrinkWrap: true,
+              physics: NeverScrollableScrollPhysics(),
+              crossAxisCount: 2,
+              mainAxisSpacing: 10,
+              crossAxisSpacing: 10,
+              childAspectRatio: 2.5,
+              children: [
+                ElevatedButton.icon(
+                  icon: Icon(Icons.miscellaneous_services, color: Colors.white),
+                  label: Text("Servicios", style: TextStyle(color: Colors.white)),
+                  style: ElevatedButton.styleFrom(backgroundColor: Colors.green),
+                  onPressed: () {
+                    Navigator.push(context, MaterialPageRoute(builder: (context) => ServiciosActivity()));
+                  },
+                ),
+                ElevatedButton.icon(
+                  icon: Icon(Icons.people, color: Colors.white),
+                  label: Text("Equipo", style: TextStyle(color: Colors.white)),
+                  style: ElevatedButton.styleFrom(backgroundColor: Colors.green[700]),
+                  onPressed: () {
+                    Navigator.push(context, MaterialPageRoute(builder: (context) => EquipoActivity()));
+                  },
+                ),
+                ElevatedButton.icon(
+                  icon: Icon(Icons.camera_alt, color: Colors.white),
+                  label: Text("Videos", style: TextStyle(color: Colors.white)),
+                  style: ElevatedButton.styleFrom(backgroundColor: Colors.green[700]),
+                  onPressed: () {
+                    Navigator.push(context, MaterialPageRoute(builder: (context) => KevinPage()));
+                  },
+                ),
+                ElevatedButton.icon(
+                  icon: Icon(Icons.report, color: Colors.white),
+                  label: Text("Reportes", style: TextStyle(color: Colors.white)),
+                  style: ElevatedButton.styleFrom(backgroundColor: Colors.orange),
+                  onPressed: () {
+                    Navigator.push(context, MaterialPageRoute(builder: (context) => ReportesActivity()));
+                  },
+                ),
+              ],
+            ),
        
             SizedBox(height: 30),
           ],
