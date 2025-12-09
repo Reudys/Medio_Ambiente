@@ -44,10 +44,17 @@ flutter_launcher_icons:
   android: true
   ios: true
   image_path: "assets/images/icon.jpg"   # <-- Usa .jpg como tu archivo real
+  flutter_launcher_icons: ^0.13.1
+
+flutter_launcher_icons:
+  android: true
+  ios: true
+  image_path: "assets/images/icon.jpg"   # <-- Usa .jpg como tu archivo real
 
 flutter:
   uses-material-design: true
 
   assets:
     - assets/videos/
+    - assets/images/icon.jpg
     - assets/images/icon.jpg
