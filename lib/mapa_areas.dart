@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_map/flutter_map.dart';
-import 'package:latlong2/latlong.dart';
+import 'package:google_maps_flutter/google_maps_flutter.dart';
 import '../api/fake_api.dart';
 import 'area_protegida.dart';
 
@@ -10,9 +9,8 @@ class MapaAreasScreen extends StatefulWidget {
 }
 
 class _MapaAreasScreenState extends State<MapaAreasScreen> {
-  List<Marker> _markers = [];
-  AreaProtegida? _areaSeleccionada;
-  final MapController _mapController = MapController();
+  Set<Marker> _markers = {};
+  AreaProtegida? _areaSeleccionada; // ← Guardamos el área seleccionada
 
   @override
   void initState() {
@@ -26,23 +24,19 @@ class _MapaAreasScreenState extends State<MapaAreasScreen> {
     setState(() {
       _markers = areas.map((area) {
         return Marker(
-          point: LatLng(area.lat, area.lng),
-          width: 40,
-          height: 40,
-          child: GestureDetector(
-            onTap: () {
-              setState(() {
-                _areaSeleccionada = area;
-              });
-            },
-            child: Icon(
-              Icons.location_on,
-              color: Colors.green[700],
-              size: 40,
-            ),
+          markerId: MarkerId(area.id.toString()),
+          position: LatLng(area.lat, area.lng),
+          infoWindow: InfoWindow(
+            title: area.nombre,
+            snippet: area.tipo,
           ),
+          onTap: () {
+            setState(() {
+              _areaSeleccionada = area; // ← Mostrar tarjeta en pantalla
+            });
+          },
         );
-      }).toList();
+      }).toSet();
     });
   }
 
@@ -56,21 +50,12 @@ class _MapaAreasScreenState extends State<MapaAreasScreen> {
       ),
       body: Stack(
         children: [
-          FlutterMap(
-            mapController: _mapController,
-            options: MapOptions(
-              initialCenter: LatLng(18.7357, -70.1627),
-              initialZoom: 7.2,
+          GoogleMap(
+            initialCameraPosition: CameraPosition(
+              target: LatLng(18.7357, -70.1627),
+              zoom: 7.2,
             ),
-            children: [
-              TileLayer(
-                urlTemplate: 'https://tile.openstreetmap.org/{z}/{x}/{y}.png',
-                userAgentPackageName: 'com.example.medio_ambiente',
-              ),
-              MarkerLayer(
-                markers: _markers,
-              ),
-            ],
+            markers: _markers,
           ),
 
           /// 📌 TARJETA QUE SALE AL TOCAR UN MARKER
