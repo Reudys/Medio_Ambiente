@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:medio_ambiente/services.dart';
 import 'package:medio_ambiente/team.dart';
+import 'package:medio_ambiente/Kevin.dart';
 
 void main() {
   runApp(MyApp());
@@ -259,6 +260,15 @@ class InicioScreen extends StatelessWidget {
                     Navigator.push(context, MaterialPageRoute(builder: (context) => EquipoActivity()));
                   },
                 ),
+                ElevatedButton.icon(
+                  icon: Icon(Icons.people),
+                  label: Text("Videos"),
+                  style: ElevatedButton.styleFrom(backgroundColor: Colors.green[700]),
+                  onPressed: () {
+                    Navigator.push(context, MaterialPageRoute(builder: (context) => KevinPage()));
+                  },
+                ),
+                
               ],
             ),
             SizedBox(height: 30),
