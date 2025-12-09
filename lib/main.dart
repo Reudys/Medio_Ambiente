@@ -261,7 +261,7 @@ class InicioScreen extends StatelessWidget {
                   },
                 ),
                 ElevatedButton.icon(
-                  icon: Icon(Icons.people),
+                  icon: Icon(Icons.camera_alt),
                   label: Text("Videos"),
                   style: ElevatedButton.styleFrom(backgroundColor: Colors.green[700]),
                   onPressed: () {
