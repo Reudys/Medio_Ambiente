@@ -1,76 +1,97 @@
-import 'dart:convert';
 import 'package:flutter/material.dart';
-import 'package:http/http.dart' as http;
 import 'package:url_launcher/url_launcher.dart';
+import 'package:open_filex/open_filex.dart'; // Para abrir PDFs locales
 
 class NormativasPage extends StatefulWidget {
+  const NormativasPage({super.key});
+
   @override
   _NormativasPageState createState() => _NormativasPageState();
 }
 
 class _NormativasPageState extends State<NormativasPage> {
-  List<dynamic> normativas = [];
   bool isLoading = true;
+  List<Map<String, String>> normativas = [];
 
   @override
   void initState() {
     super.initState();
-    fetchNormativas();
+    _loadNormativas();
   }
 
-  Future<void> fetchNormativas() async {
-    final url = Uri.parse('https://adamix.net/medioambiente/normativas');
-    try {
-      final response = await http.get(url);
-      if (response.statusCode == 200) {
-        setState(() {
-          normativas = json.decode(response.body);
-          isLoading = false;
-        });
-      } else {
-        throw Exception('Error al cargar normativas');
-      }
-    } catch (e) {
-      setState(() => isLoading = false);
-      ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(content: Text('No se pudieron cargar las normativas')),
-      );
-    }
+  void _loadNormativas() async {
+    await Future.delayed(const Duration(seconds: 1)); // Simula tiempo de carga
+    setState(() {
+      normativas = [
+        {
+          'titulo': 'Ley de Recursos Naturales',
+          'tipo': 'Ley',
+          'fecha_publicacion': '2020-01-15',
+          'url_documento': 'https://observatoriop10.cepal.org/es/instrumento/ley-general-ambiente-recursos-naturales-ley-no-217-1996'
+        },
+        {
+          'titulo': 'Reglamento de Residuos',
+          'tipo': 'Reglamento',
+          'fecha_publicacion': '2019-06-20',
+          'url_documento': 'Recursos.pdf' // PDF local en assets/docs/
+        },
+        {
+          'titulo': 'Normativa de Agua Potable',
+          'tipo': 'Reglamento',
+          'fecha_publicacion': '2021-03-12',
+          'url_documento': 'https://example.com/agua.pdf'
+        },
+      ];
+      isLoading = false;
+    });
   }
 
+  // Abrir URL externa
   void abrirUrl(String url) async {
-    if (await canLaunch(url)) {
-      await launch(url);
+    final uri = Uri.parse(url);
+    if (await canLaunchUrl(uri)) {
+      await launchUrl(uri, mode: LaunchMode.externalApplication);
     } else {
       ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(content: Text('No se pudo abrir el documento')),
+        const SnackBar(content: Text('No se pudo abrir el documento')),
       );
     }
+  }
+
+  // Abrir PDF local
+  void abrirDocumentoLocal(String assetPath) async {
+    await OpenFilex.open(assetPath);
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Normativas Ambientales'),
+        title: const Text('Normativas Ambientales'),
         backgroundColor: Colors.green,
       ),
       body: isLoading
-          ? Center(child: CircularProgressIndicator())
+          ? const Center(child: CircularProgressIndicator())
           : ListView.separated(
-              padding: EdgeInsets.all(16),
+              padding: const EdgeInsets.all(16),
               itemCount: normativas.length,
-              separatorBuilder: (_, __) => Divider(),
+              separatorBuilder: (_, __) => const Divider(),
               itemBuilder: (context, index) {
                 final n = normativas[index];
                 return Card(
                   elevation: 3,
                   child: ListTile(
-                    leading: Icon(Icons.gavel, color: Colors.green),
-                    title: Text(n['titulo']),
+                    leading: const Icon(Icons.gavel, color: Colors.green),
+                    title: Text(n['titulo']!),
                     subtitle: Text('${n['tipo']} - ${n['fecha_publicacion']}'),
-                    trailing: Icon(Icons.open_in_new),
-                    onTap: () => abrirUrl(n['url_documento']),
+                    trailing: const Icon(Icons.open_in_new),
+                    onTap: () {
+                      if (n['url_documento']!.startsWith('http')) {
+                        abrirUrl(n['url_documento']!); // enlace externo
+                      } else {
+                        abrirDocumentoLocal('assets/docs/${n['url_documento']}'); // PDF local
+                      }
+                    },
                   ),
                 );
               },

@@ -27,6 +27,8 @@ dependencies:
   shared_preferences: ^2.5.4
   flutter_inappwebview: ^6.1.5
   url_launcher: ^6.1.10
+  open_filex: ^3.4.0
+
 
 
 dev_dependencies:
@@ -39,6 +41,7 @@ flutter_launcher_icons:
   android: true
   ios: true
   image_path: "assets/images/icon.jpg"
+  
 
 flutter:
   uses-material-design: true
@@ -46,3 +49,7 @@ flutter:
   assets:
     - assets/videos/
     - assets/images/icon.jpg
+    - assets/docs/Agua.pdf
+    - assets/docs/Recursos.pdf
+    - assets/docs/Residuos.pdf
+
