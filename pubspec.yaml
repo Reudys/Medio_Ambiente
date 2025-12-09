@@ -13,25 +13,41 @@ dependencies:
     sdk: flutter
 
   http: ^1.6.0
+  image_picker: ^1.0.0
+  geolocator: ^10.0.0
+  flutter_map: ^6.0.0
+  latlong2: ^0.9.0
+  permission_handler: ^11.0.0
   cupertino_icons: ^1.0.8
   carousel_slider: ^5.1.1
   video_player: ^2.5.0
   provider: ^6.1.1
-  youtube_player_flutter: ^8.1.2
+  youtube_player_flutter: ^9.1.3
+  google_maps_flutter: ^2.6.1
 
-  google_maps_flutter: ^2.6.1         # Mapa y markers
-  geolocator: ^12.0.0                 # Posición actual
-  geocoding: ^3.0.0                   # Buscar direcciones por coordenadas
-  flutter_svg: ^2.0.9                 # Iconos SVG para categorías
-  flutter_dotenv: ^5.1.0              # API keys .env
+    # google_maps_flutter: ^2.6.1         # Mapa y markers
+    # geolocator: ^12.0.0                 # Posición actual
+    # geocoding: ^3.0.0                   # Buscar direcciones por coordenadas
+    # flutter_svg: ^2.0.9                 # Iconos SVG para categorías
+    # flutter_dotenv: ^5.1.0              # API keys .env
+  shared_preferences: ^2.5.4
+
+  flutter_inappwebview: ^6.1.5
 
 dev_dependencies:
   flutter_test:
     sdk: flutter
   flutter_lints: ^5.0.0
+  flutter_launcher_icons: ^0.13.1
+
+flutter_launcher_icons:
+  android: true
+  ios: true
+  image_path: "assets/images/icon.jpg"   # <-- Usa .jpg como tu archivo real
 
 flutter:
   uses-material-design: true
 
   assets:
     - assets/videos/
+    - assets/images/icon.jpg
