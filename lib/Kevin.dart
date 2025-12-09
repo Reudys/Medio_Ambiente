@@ -1,20 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:video_player/video_player.dart';
 
-void main() => runApp(const KevinApp());
-
-class KevinApp extends StatelessWidget {
-  const KevinApp({super.key});
+class KevinPage extends StatefulWidget {
+  const KevinPage({super.key});
 
   @override
-  Widget build(BuildContext context) {
-    return MaterialApp(
-      debugShowCheckedModeBanner: false,
-      title: 'Videos Kevin',
-      theme: ThemeData(primarySwatch: Colors.blue),
-      home: const KevinPage(),
-    );
-  }
+  State<KevinPage> createState() => _KevinPageState();
 }
 
 class VideoItem {
@@ -22,13 +13,6 @@ class VideoItem {
   final String assetPath;
 
   const VideoItem({required this.title, required this.assetPath});
-}
-
-class KevinPage extends StatefulWidget {
-  const KevinPage({super.key});
-
-  @override
-  State<KevinPage> createState() => _KevinPageState();
 }
 
 class _KevinPageState extends State<KevinPage> {
@@ -71,10 +55,18 @@ class _KevinPageState extends State<KevinPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: const Text('Videos Kevin')),
+      appBar: AppBar(
+        title: const Text('Videos ambientales'),
+        backgroundColor: Colors.green[800],
+        titleTextStyle: TextStyle(
+          color: Colors.white,
+          fontWeight: FontWeight.bold,
+          fontSize: 25,
+        ),
+      ),
       body: Column(
         children: [
-          // Video Player adaptado
+          // Video Player
           Expanded(
             flex: 4,
             child: Container(
@@ -128,9 +120,7 @@ class _KevinPageState extends State<KevinPage> {
                   : const Center(child: CircularProgressIndicator()),
             ),
           ),
-
           const SizedBox(height: 8),
-
           // Lista de Videos
           Expanded(
             flex: 6,
@@ -142,8 +132,7 @@ class _KevinPageState extends State<KevinPage> {
                 return Card(
                   color: selected ? Colors.blue.shade50 : Colors.white,
                   elevation: selected ? 6 : 2,
-                  shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(12)),
+                  shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
                   child: ListTile(
                     title: Text(v.title),
                     trailing: Icon(selected ? Icons.play_circle_fill : Icons.play_arrow),
