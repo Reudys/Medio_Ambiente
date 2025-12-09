@@ -6,7 +6,7 @@ publish_to: 'none'
 version: 1.0.0+1
 
 environment:
-  sdk: ^3.9.2
+  sdk: ">=3.0.0 <4.0.0"
 
 dependencies:
   flutter:
@@ -24,15 +24,10 @@ dependencies:
   provider: ^6.1.1
   youtube_player_flutter: ^9.1.3
   google_maps_flutter: ^2.6.1
-
-    # google_maps_flutter: ^2.6.1         # Mapa y markers
-    # geolocator: ^12.0.0                 # Posición actual
-    # geocoding: ^3.0.0                   # Buscar direcciones por coordenadas
-    # flutter_svg: ^2.0.9                 # Iconos SVG para categorías
-    # flutter_dotenv: ^5.1.0              # API keys .env
   shared_preferences: ^2.5.4
-
   flutter_inappwebview: ^6.1.5
+  url_launcher: ^6.1.10
+
 
 dev_dependencies:
   flutter_test:
@@ -43,18 +38,11 @@ dev_dependencies:
 flutter_launcher_icons:
   android: true
   ios: true
-  image_path: "assets/images/icon.jpg"   # <-- Usa .jpg como tu archivo real
-  flutter_launcher_icons: ^0.13.1
-
-flutter_launcher_icons:
-  android: true
-  ios: true
-  image_path: "assets/images/icon.jpg"   # <-- Usa .jpg como tu archivo real
+  image_path: "assets/images/icon.jpg"
 
 flutter:
   uses-material-design: true
 
   assets:
     - assets/videos/
-    - assets/images/icon.jpg
     - assets/images/icon.jpg
